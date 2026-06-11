@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/header';
 import { CTASection, PageHero, Section } from '@/components/ui';
-import { insights } from '@/lib/data';
+import { getInsights } from '@/lib/cms';
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Market Insights | Scottsdale & Phoenix Luxury Real Estate',
@@ -13,7 +15,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/insights' },
 };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const insights = await getInsights();
   return (
     <>
       <JsonLd
