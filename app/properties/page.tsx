@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/header';
 import { CTASection, PageHero, PropertyCard, Section } from '@/components/ui';
-import { properties } from '@/lib/data';
+import { getProperties } from '@/lib/cms';
 import { JsonLd } from '@/components/json-ld';
 import { breadcrumbSchema } from '@/lib/schema';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Luxury Homes for Sale in Scottsdale & Phoenix | Property Search',
@@ -13,7 +15,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/properties' },
 };
 
-export default function PropertiesPage() {
+export default async function PropertiesPage() {
+  const properties = await getProperties();
   return (
     <>
       <Header solid />
