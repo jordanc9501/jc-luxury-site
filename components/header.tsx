@@ -41,7 +41,7 @@ export function Header({ solid = false }: { solid?: boolean }) {
           <img
             src={dark ? site.logoDark : site.logoLight}
             alt={`${site.name} — ${site.brand}`}
-            className="h-10 w-auto md:h-11"
+            className="h-14 w-auto md:h-16"
           />
         </Link>
 

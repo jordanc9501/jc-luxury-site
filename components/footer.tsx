@@ -33,7 +33,7 @@ export function Footer() {
             <img
               src={site.logoDark}
               alt={`${site.name} — ${site.brand}`}
-              className="mb-5 h-14 w-auto"
+              className="mb-5 h-20 w-auto"
             />
             <p className="mb-3 font-serif text-xl text-coal">
               Jordan Cohen — Luxury Residential
@@ -97,7 +97,7 @@ export function Footer() {
           </p>
           <div className="mt-5 flex items-center gap-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={site.compassLogo} alt="Compass" className="h-6 w-auto" />
+            <img src={site.compassLogo} alt="Compass" className="h-9 w-auto" />
             <p>
               © {new Date().getFullYear()} {site.brand}. All rights reserved.
             </p>
