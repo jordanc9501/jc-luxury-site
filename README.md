@@ -41,6 +41,20 @@ All forms POST to `/api/lead`, which creates a lead via the FUB Events API (sour
 
 If the key is missing or FUB errors, forms gracefully fall back to opening a pre-filled email to jordan@jcluxuryresidential.com.
 
+## CMS — Sanity (admin panel at /studio)
+
+Listings, neighborhoods, testimonials, and articles are editable at `yoursite.com/studio` once connected. Until then (or if Sanity is ever empty/unreachable), the site automatically falls back to the built-in content in `lib/data.ts` — per content type.
+
+Setup (one time):
+
+1. Create a free account at sanity.io → Create project (name: anything, dataset: `production`).
+2. Copy the **Project ID** from the project dashboard.
+3. In Vercel → Settings → Environment Variables add `NEXT_PUBLIC_SANITY_PROJECT_ID` = that ID. Redeploy.
+4. In sanity.io → your project → API → CORS Origins: add your site URL(s) (e.g. `https://jc-luxury-site.vercel.app` and later `https://jcluxuryresidential.com`) with "Allow credentials" checked.
+5. Visit `/studio`, log in with your Sanity account, and start adding content. Site updates within ~60 seconds of publishing.
+
+Note: content you add in the CMS replaces the built-in content for that type (e.g. adding one property in the CMS means the CMS list is what shows — so add all listings there once you start).
+
 ## Deploying to Vercel
 
 1. Create a free GitHub account and a Vercel account (vercel.com → sign up with GitHub). These must be created by you.
