@@ -7,6 +7,10 @@ const nextConfig = {
       { protocol: 'https', hostname: 'dlajgvw9htjpb.cloudfront.net' },
     ],
   },
+  // Sanity Studio is a SPA at /studio; serve it for deep links too
+  async rewrites() {
+    return [{ source: '/studio/:path+', destination: '/studio' }];
+  },
   // 301s from the old Luxury Presence URL structure (SEO preservation)
   async redirects() {
     return [
