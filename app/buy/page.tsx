@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { ContactForm } from '@/components/contact-form';
 import { FaqList, PageHero, Section, TestimonialBlock } from '@/components/ui';
-import { buyerFaqs, testimonials } from '@/lib/data';
+import { buyerFaqs } from '@/lib/data';
+import { getTestimonials } from '@/lib/cms';
+
+export const revalidate = 60;
 import { breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
@@ -23,7 +26,8 @@ const pillars = [
   ['Through Closing & Beyond', 'Inspections, vendors, and questions answered long after keys change hands.'],
 ];
 
-export default function BuyPage() {
+export default async function BuyPage() {
+  const testimonials = await getTestimonials();
   return (
     <>
       <JsonLd
@@ -67,8 +71,9 @@ export default function BuyPage() {
       <Section>
         <h2 className="mb-10 text-3xl md:text-4xl">From Recent Buyers</h2>
         <div className="grid gap-7 md:grid-cols-2">
-          <TestimonialBlock t={testimonials[1]} />
-          <TestimonialBlock t={testimonials[2]} />
+          {testimonials.slice(0, 2).map((t) => (
+            <TestimonialBlock key={t.name} t={t} />
+          ))}
         </div>
       </Section>
 
