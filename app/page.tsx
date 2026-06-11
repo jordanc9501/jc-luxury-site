@@ -7,10 +7,17 @@ import {
   Section,
   SectionHead,
 } from '@/components/ui';
-import { neighborhoods, properties, testimonials } from '@/lib/data';
+import { getNeighborhoods, getProperties, getTestimonials } from '@/lib/cms';
 import { site } from '@/lib/site';
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const [properties, neighborhoods, testimonials] = await Promise.all([
+    getProperties(),
+    getNeighborhoods(),
+    getTestimonials(),
+  ]);
   const featured = properties.filter((p) => !p.sample).slice(0, 3);
 
   return (

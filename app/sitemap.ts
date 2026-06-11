@@ -1,8 +1,13 @@
 import type { MetadataRoute } from 'next';
-import { insights, neighborhoods, properties } from '@/lib/data';
+import { getInsights, getNeighborhoods, getProperties } from '@/lib/cms';
 import { site } from '@/lib/site';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [properties, neighborhoods, insights] = await Promise.all([
+    getProperties(),
+    getNeighborhoods(),
+    getInsights(),
+  ]);
   const now = new Date();
   const statics = [
     '',
