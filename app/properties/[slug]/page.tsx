@@ -4,12 +4,15 @@ import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { ContactForm } from '@/components/contact-form';
 import { CTASection, PropertyCard, Section } from '@/components/ui';
-import { formatPrice, properties, statusLabel } from '@/lib/data';
+import { formatPrice, statusLabel } from '@/lib/data';
+import { getProperties, getProperty } from '@/lib/cms';
 import { breadcrumbSchema, propertySchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
-export function generateStaticParams() {
-  return properties.map((p) => ({ slug: p.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getProperties()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const p = properties.find((x) => x.slug === slug);
+  const p = await getProperty(slug);
   if (!p) return {};
   return {
     title: p.seoTitle,
@@ -34,10 +37,11 @@ export default async function PropertyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = properties.find((x) => x.slug === slug);
+  const p = await getProperty(slug);
   if (!p) notFound();
 
-  const similar = properties.filter((x) => x.slug !== p.slug && !x.sample).slice(0, 3);
+  const all = await getProperties();
+  const similar = all.filter((x) => x.slug !== p.slug && !x.sample).slice(0, 3);
   const facts: [string, string][] = [
     ['Status', statusLabel[p.status]],
     ['Beds', String(p.beds)],
