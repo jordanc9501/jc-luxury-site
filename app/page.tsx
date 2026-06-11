@@ -48,7 +48,7 @@ export default async function Home() {
           <p className="eyebrow mb-5 !text-paper/75">
             Scottsdale · Paradise Valley · Arcadia · Biltmore
           </p>
-          <h1 className="max-w-[14ch] text-5xl md:text-7xl lg:text-8xl">
+          <h1 className="max-w-[20ch] text-4xl md:text-6xl lg:text-7xl">
             Arizona Real Estate, Curated With Precision.
           </h1>
           <p className="mt-6 max-w-xl text-paper/85">
