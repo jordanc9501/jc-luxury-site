@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/header';
 import { CTASection, Section, TestimonialBlock } from '@/components/ui';
-import { testimonials } from '@/lib/data';
+import { getTestimonials } from '@/lib/cms';
 import { site } from '@/lib/site';
+
+export const revalidate = 60;
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
@@ -14,7 +16,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about' },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const testimonials = await getTestimonials();
   return (
     <>
       <JsonLd
