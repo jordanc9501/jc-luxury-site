@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { ContactForm } from '@/components/contact-form';
 import { FaqList, PageHero, Section, TestimonialBlock } from '@/components/ui';
-import { sellerFaqs, testimonials } from '@/lib/data';
+import { sellerFaqs } from '@/lib/data';
+import { getTestimonials } from '@/lib/cms';
+
+export const revalidate = 60;
 import { breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
@@ -23,7 +26,8 @@ const process = [
   ['Negotiation & Close', 'Skilled negotiation and white-glove management through funding.'],
 ];
 
-export default function SellPage() {
+export default async function SellPage() {
+  const testimonials = await getTestimonials();
   return (
     <>
       <JsonLd
@@ -67,8 +71,9 @@ export default function SellPage() {
       <Section>
         <h2 className="mb-10 text-3xl md:text-4xl">From Recent Sellers</h2>
         <div className="grid gap-7 md:grid-cols-2">
-          <TestimonialBlock t={testimonials[0]} />
-          <TestimonialBlock t={testimonials[3]} />
+          {testimonials.slice(0, 2).map((t) => (
+            <TestimonialBlock key={t.name} t={t} />
+          ))}
         </div>
       </Section>
 
