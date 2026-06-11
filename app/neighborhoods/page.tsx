@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { CTASection, NeighborhoodCard, PageHero, Section } from '@/components/ui';
-import { neighborhoods } from '@/lib/data';
+import { getNeighborhoods } from '@/lib/cms';
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Best Neighborhoods in Scottsdale & Phoenix | Community Guides',
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/neighborhoods' },
 };
 
-export default function NeighborhoodsPage() {
+export default async function NeighborhoodsPage() {
+  const neighborhoods = await getNeighborhoods();
   return (
     <>
       <JsonLd
