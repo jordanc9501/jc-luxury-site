@@ -80,9 +80,9 @@ export default async function NeighborhoodPage({
         <div className="grid gap-16 lg:grid-cols-[1.6fr_1fr]">
           <div>
             <h2 className="text-3xl md:text-4xl">Overview</h2>
-            <p className="mt-5 leading-relaxed text-mist">{n.overview}</p>
+            <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.overview}</p>
             <h2 className="mt-12 text-3xl md:text-4xl">The Lifestyle</h2>
-            <p className="mt-5 leading-relaxed text-mist">{n.lifestyle}</p>
+            <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.lifestyle}</p>
 
             <h2 className="mt-14 text-3xl md:text-4xl">
               {n.name} — Questions, Answered
