@@ -24,19 +24,18 @@ export const site = {
     'Old Town Scottsdale',
   ],
   portrait: '/headshot.jpg', // optimized copy in public/; original: "Jordan Headshot Edit (1).jpg"
+  // All brand assets are self-hosted on the project's Sanity CDN
+  // (copied from the old Luxury Presence site — no LP dependency).
   heroImage:
-    'https://media-production.lp-cdn.com/cdn-cgi/image/format=auto,quality=85,fit=scale-down,width=1920/https://media-production.lp-cdn.com/media/b7e23457-e24b-400e-8fc4-f0cede9a938c',
-  // Hero video from the current site (Luxury Presence / Cloudinary).
-  // Re-host before launch — see README launch checklist.
+    'https://cdn.sanity.io/images/nfo48qlc/production/e2446c7f1eb09066c5d8779797d5e549fc8a1523-1920x2304.jpg',
   heroVideo:
-    'https://res.cloudinary.com/luxuryp/videos/f_mp4,vc_h264,q_auto/ym7rkkecqwom1wvhx4j2/hov.mp4',
-  // Logo variants from the current site
+    'https://cdn.sanity.io/files/nfo48qlc/production/55478f49bc5b18a527439f04ded61b26e27f205f.mp4',
   logoLight:
-    'https://media-production.lp-cdn.com/cdn-cgi/image/format=auto,quality=85,fit=scale-down,width=640/https://media-production.lp-cdn.com/media/573940f7-8b30-4a95-a867-5c6aff72e2f7',
+    'https://cdn.sanity.io/images/nfo48qlc/production/02cf2008bdd695e69286cce78db53ca67f1a52fc-640x154.png',
   logoDark:
-    'https://media-production.lp-cdn.com/cdn-cgi/image/format=auto,quality=85,fit=scale-down,width=640/https://media-production.lp-cdn.com/media/a7b71603-6769-46d4-a643-3cce7b859b96',
+    'https://cdn.sanity.io/images/nfo48qlc/production/7af534d0fcd6b3701711ee2eb8b76805759b39bb-640x154.png',
   compassLogo:
-    'https://media-production.lp-cdn.com/cdn-cgi/image/format=auto,quality=85/https://media-production.lp-cdn.com/media/jnymuan6tigs629jigsz',
+    'https://cdn.sanity.io/images/nfo48qlc/production/70e1c0949551f7a52b0c5ebc7868764f46771265-390x140.png',
   social: {
     instagram: 'https://www.instagram.com/jcluxuryresidential',
     facebook: 'https://www.facebook.com/JordanAnthonyCohen',
