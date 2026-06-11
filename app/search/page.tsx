@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { IdxEmbed } from '@/components/idx-embed';
 import { CTASection, PageHero, PropertyCard, Section } from '@/components/ui';
-import { properties } from '@/lib/data';
+import { getProperties } from '@/lib/cms';
 import { site } from '@/lib/site';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Search Homes for Sale in Scottsdale & Phoenix | MLS Home Search',
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/search' },
 };
 
-export default function SearchPage() {
+export default async function SearchPage() {
+  const properties = await getProperties();
   return (
     <>
       <Header solid />
