@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #1c1c1b;
+  --color-coal: #111110;
+  --color-paper: #fcfcfa;
+  --color-stone: #f4f4f1;
+  --color-line: #e3e3df;
+  --color-mist: #6b6b68;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-serif font-medium;
+}
+
+.eyebrow {
+  @apply text-[11px] tracking-[0.32em] uppercase text-mist;
+}
+
+.btn-solid,
+.btn-ghost,
+.btn-light {
+  display: inline-block;
+  border: 1px solid;
+  padding: 1rem 2.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-solid {
+  border-color: var(--color-coal);
+  background: var(--color-coal);
+  color: var(--color-paper);
+}
+.btn-solid:hover {
+  background: transparent;
+  color: var(--color-coal);
+}
+.btn-ghost {
+  border-color: var(--color-coal);
+  color: var(--color-coal);
+}
+.btn-ghost:hover {
+  background: var(--color-coal);
+  color: var(--color-paper);
+}
+.btn-light {
+  border-color: var(--color-paper);
+  color: var(--color-paper);
+}
+.btn-light:hover {
+  background: var(--color-paper);
+  color: var(--color-coal);
+}
+
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
