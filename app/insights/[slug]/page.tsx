@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { CTASection, Section } from '@/components/ui';
-import { insights } from '@/lib/data';
+import { getInsight, getInsights } from '@/lib/cms';
 import { articleSchema, breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
-export function generateStaticParams() {
-  return insights.map((a) => ({ slug: a.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getInsights()).map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const a = insights.find((x) => x.slug === slug);
+  const a = await getInsight(slug);
   if (!a) return {};
   return {
     title: a.title,
@@ -32,9 +34,9 @@ export default async function InsightPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const a = insights.find((x) => x.slug === slug);
+  const a = await getInsight(slug);
   if (!a) notFound();
-  const more = insights.filter((x) => x.slug !== a.slug).slice(0, 2);
+  const more = (await getInsights()).filter((x) => x.slug !== a.slug).slice(0, 2);
 
   return (
     <>
