@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { CTASection, FaqList, PropertyCard, Section } from '@/components/ui';
-import { neighborhoods, properties } from '@/lib/data';
+import { getNeighborhood, getNeighborhoods, getProperties } from '@/lib/cms';
 import { breadcrumbSchema, faqSchema, neighborhoodSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
-export function generateStaticParams() {
-  return neighborhoods.map((n) => ({ slug: n.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getNeighborhoods()).map((n) => ({ slug: n.slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const n = neighborhoods.find((x) => x.slug === slug);
+  const n = await getNeighborhood(slug);
   if (!n) return {};
   return {
     title: `${n.name} Homes for Sale & Neighborhood Guide`,
@@ -33,9 +35,13 @@ export default async function NeighborhoodPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const n = neighborhoods.find((x) => x.slug === slug);
+  const n = await getNeighborhood(slug);
   if (!n) notFound();
 
+  const [properties, neighborhoods] = await Promise.all([
+    getProperties(),
+    getNeighborhoods(),
+  ]);
   const listings = properties.filter(
     (p) => p.neighborhood && n.name.toLowerCase().includes(p.neighborhood.toLowerCase()),
   );
