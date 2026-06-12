@@ -15,22 +15,29 @@ const ST_40 = -111.9897;
 const ST_44 = -111.981;
 const ST_56 = -111.9554;
 const ST_68 = -111.9295;
-// Arizona Canal crossings: dips south to Arizona Falls at 56th & Indian School
-const CANAL_AT_44 = 33.5028;
-const CANAL_AT_56 = 33.4953;
-const CANAL_AT_68 = 33.5016;
-
 const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?: boolean }[] = [
   {
-    // 44th to 68th, Camelback south to the Arizona Canal
+    // The lens between Camelback Rd (which bends along the mountain base)
+    // and the Arizona Canal's arc, 44th St to the canal mouth near
+    // Fashion Square. Traced from Jordan's drawn boundary.
     name: 'Arcadia Proper',
     sub: 'largest irrigated lots · strongest values',
     bounds: [[
-      [CAMELBACK, ST_44],
-      [CAMELBACK, ST_68],
-      [CANAL_AT_68, ST_68],
-      [CANAL_AT_56, ST_56],
-      [CANAL_AT_44, ST_44],
+      [33.5093, -111.981],   // 44th & Camelback
+      [33.5085, -111.9745],  // Camelback bending SE along the mountain
+      [33.505, -111.965],
+      [33.5023, -111.956],   // Camelback at ~56th
+      [33.5023, -111.9295],  // Camelback at 68th
+      [33.5015, -111.9268],  // NE tip — canal meets Camelback near Fashion Square
+      [33.4985, -111.93],    // canal heading SW
+      [33.4945, -111.934],
+      [33.49, -111.9405],    // canal's southern dip
+      [33.4888, -111.947],
+      [33.492, -111.953],
+      [33.4953, -111.9554],  // Arizona Falls (56th & Indian School)
+      [33.4949, -111.96],    // canal crossing Indian School
+      [33.499, -111.968],    // canal heading NW
+      [33.506, -111.9805],   // canal at 44th St
     ]],
     strong: true,
   },
