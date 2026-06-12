@@ -79,6 +79,20 @@ export const neighborhoodType = defineType({
       ],
     }),
     defineField({
+      name: 'microAreas',
+      title: 'Micro-Areas (shown with the map, if any)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'name', type: 'string' },
+            { name: 'description', type: 'text' },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'faqs',
       title: 'FAQs (powers Google rich results)',
       type: 'array',
