@@ -83,6 +83,16 @@ export default async function NeighborhoodPage({
             <h2 className="text-3xl md:text-4xl">Overview</h2>
             <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.overview}</p>
             {n.slug === 'arcadia' && <ArcadiaMap />}
+            {(n.microAreas?.length ?? 0) > 0 && (
+              <div className="mt-10 space-y-8">
+                {n.microAreas!.map((m) => (
+                  <div key={m.name} className="border-l-2 border-coal pl-6">
+                    <h3 className="font-serif text-2xl">{m.name}</h3>
+                    <p className="mt-2 leading-relaxed text-mist">{m.description}</p>
+                  </div>
+                ))}
+              </div>
+            )}
             <h2 className="mt-12 text-3xl md:text-4xl">The Lifestyle</h2>
             <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.lifestyle}</p>
 
