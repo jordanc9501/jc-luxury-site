@@ -5,6 +5,7 @@ import { agentSchema, websiteSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 import { Footer } from '@/components/footer';
 import { LeadModal } from '@/components/lead-modal';
+import { ScrollReveal } from '@/components/scroll-reveal';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <LeadModal />
+        <ScrollReveal />
       </body>
     </html>
   );
