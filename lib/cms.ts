@@ -53,6 +53,7 @@ const NEIGHBORHOOD_Q = `*[_type == "neighborhood"] | order(name asc) {
   name, blurb, overview, lifestyle,
   "image": image.asset->url,
   "marketSnapshot": coalesce(marketSnapshot, []),
+  "microAreas": coalesce(microAreas, []),
   "faqs": coalesce(faqs, [])
 }`;
 

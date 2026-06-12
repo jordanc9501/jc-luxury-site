@@ -47,6 +47,7 @@ export type Neighborhood = {
   overview: string;
   lifestyle: string;
   marketSnapshot: { label: string; value: string }[];
+  microAreas?: { name: string; description: string }[];
   faqs: { q: string; a: string }[];
 };
 
