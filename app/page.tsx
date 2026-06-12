@@ -7,6 +7,7 @@ import {
   Section,
   SectionHead,
 } from '@/components/ui';
+import { TestimonialCarousel } from '@/components/testimonial-carousel';
 import { getNeighborhoods, getProperties, getTestimonials } from '@/lib/cms';
 import { site } from '@/lib/site';
 
@@ -44,7 +45,8 @@ export default async function Home() {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-coal/80 via-coal/20 to-coal/35" />
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-[6vw] pb-24">
+        <div className="relative z-10 w-full px-[6vw] pb-24">
+          <div className="mx-auto max-w-7xl">
           <p className="eyebrow mb-5 !text-paper/75">
             Scottsdale · Paradise Valley · Arcadia · Biltmore
           </p>
@@ -66,6 +68,7 @@ export default async function Home() {
             >
               Request a Private Consultation
             </Link>
+          </div>
           </div>
         </div>
       </div>
@@ -219,17 +222,9 @@ export default async function Home() {
         </div>
       </Section>
 
-      {/* Testimonial */}
+      {/* Testimonials — rotates through every review */}
       <Section>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow mb-6">Trusted by Discerning Clients</p>
-          <blockquote className="font-serif text-3xl italic leading-snug md:text-4xl">
-            “{testimonials[0].quote}”
-          </blockquote>
-          <p className="mt-7 text-[11px] tracking-[0.28em] uppercase text-mist">
-            {testimonials[0].name} — {testimonials[0].role}
-          </p>
-        </div>
+        <TestimonialCarousel items={testimonials} />
       </Section>
 
       <CTASection />
