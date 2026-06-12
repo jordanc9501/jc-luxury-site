@@ -47,8 +47,11 @@ export const SectionHead = ({
 );
 
 export const PropertyCard = ({ p }: { p: Property }) => (
-  <Link href={`/properties/${p.slug}`} className="group block">
-    <div className="relative aspect-[4/3] overflow-hidden bg-stone">
+  <Link
+    href={`/properties/${p.slug}`}
+    className="group block transition-all duration-500 hover:-translate-y-1.5"
+  >
+    <div className="relative aspect-[4/3] overflow-hidden bg-stone shadow-none transition-shadow duration-500 group-hover:shadow-[0_28px_56px_-28px_rgba(17,17,16,0.45)]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={p.mainImage}
@@ -77,7 +80,7 @@ export const PropertyCard = ({ p }: { p: Property }) => (
 export const NeighborhoodCard = ({ n }: { n: Neighborhood }) => (
   <Link
     href={`/neighborhoods/${n.slug}`}
-    className="group relative flex aspect-[3/4] items-end overflow-hidden"
+    className="group relative flex aspect-[3/4] items-end overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_56px_-28px_rgba(17,17,16,0.5)]"
   >
     {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
@@ -97,7 +100,7 @@ export const NeighborhoodCard = ({ n }: { n: Neighborhood }) => (
 );
 
 export const TestimonialBlock = ({ t }: { t: Testimonial }) => (
-  <figure className="border border-line bg-paper p-8">
+  <figure className="border border-line bg-paper p-8 transition-all duration-500 hover:-translate-y-1 hover:border-coal hover:shadow-[0_20px_40px_-24px_rgba(17,17,16,0.35)]">
     <blockquote className="font-serif text-xl italic leading-relaxed">
       “{t.quote}”
     </blockquote>
