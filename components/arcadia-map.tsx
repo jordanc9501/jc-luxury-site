@@ -11,25 +11,40 @@ const CAMELBACK = 33.5093;
 const INDIAN_SCHOOL = 33.4949;
 const THOMAS = 33.4805;
 const ST_32 = -112.007;
+const ST_40 = -111.9897;
 const ST_44 = -111.981;
+const ST_56 = -111.9554;
 const ST_68 = -111.9295;
+// Arizona Canal crossings: dips south to Arizona Falls at 56th & Indian School
+const CANAL_AT_44 = 33.5028;
+const CANAL_AT_56 = 33.4953;
+const CANAL_AT_68 = 33.5016;
 
 const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?: boolean }[] = [
   {
+    // 44th to 68th, Camelback south to the Arizona Canal
     name: 'Arcadia Proper',
     sub: 'largest irrigated lots · strongest values',
-    bounds: [[[INDIAN_SCHOOL, ST_44], [CAMELBACK, ST_44], [CAMELBACK, ST_68], [INDIAN_SCHOOL, ST_68]]],
+    bounds: [[
+      [CAMELBACK, ST_44],
+      [CAMELBACK, ST_68],
+      [CANAL_AT_68, ST_68],
+      [CANAL_AT_56, ST_56],
+      [CANAL_AT_44, ST_44],
+    ]],
     strong: true,
   },
   {
+    // 32nd to 44th, Camelback to Indian School
     name: 'Arcadia Lite',
     sub: 'friendlier entry points',
     bounds: [[[INDIAN_SCHOOL, ST_32], [CAMELBACK, ST_32], [CAMELBACK, ST_44], [INDIAN_SCHOOL, ST_44]]],
   },
   {
+    // 40th to 56th, Indian School to Thomas
     name: 'Arcadia Osborn',
     sub: 'renovation hotspot',
-    bounds: [[[THOMAS, ST_44], [INDIAN_SCHOOL, ST_44], [INDIAN_SCHOOL, ST_68], [THOMAS, ST_68]]],
+    bounds: [[[THOMAS, ST_40], [INDIAN_SCHOOL, ST_40], [INDIAN_SCHOOL, ST_56], [THOMAS, ST_56]]],
   },
 ];
 
@@ -99,8 +114,9 @@ export function ArcadiaMap() {
         aria-label="Map of Arcadia Proper, Arcadia Lite, and Arcadia Osborn in Phoenix, Arizona"
       />
       <figcaption className="mt-3 text-xs text-mist">
-        Boundaries are informal and approximate — drawn to the arterial grid
-        (Camelback Rd to Thomas Rd, 32nd St to 68th St).
+        Arcadia Proper: 44th–68th St, Camelback Rd to the Arizona Canal ·
+        Arcadia Lite: 32nd–44th St, Camelback to Indian School · Arcadia
+        Osborn: 40th–56th St, Indian School to Thomas. Boundaries informal.
       </figcaption>
     </figure>
   );
