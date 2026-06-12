@@ -17,6 +17,12 @@ export const metadata: Metadata = {
 
 export default async function PropertiesPage() {
   const properties = await getProperties();
+  const exclusives = properties.filter(
+    (p) => p.status === 'private-exclusive' && !p.sample,
+  );
+  const featured = properties.filter(
+    (p) => p.status !== 'private-exclusive' && !p.sample,
+  );
   return (
     <>
       <Header solid />
@@ -31,9 +37,29 @@ export default async function PropertiesPage() {
         title="Featured Properties"
         sub="A curated selection of exceptional residences, private opportunities, and standout homes across the Valley."
       />
+      {exclusives.length > 0 && (
+        <Section className="bg-coal !py-20 text-paper">
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow mb-4 !text-paper/55">Off Market</p>
+              <h2 className="text-4xl md:text-5xl">Private Exclusives</h2>
+            </div>
+            <p className="max-w-md text-sm text-paper/65">
+              Select properties available through Jordan before — or instead
+              of — a public launch. Inquire for full details and showings.
+            </p>
+          </div>
+          <div className="grid gap-9 md:grid-cols-2 lg:grid-cols-3 [&_p]:!text-paper [&_.text-mist]:!text-paper/60 [&_.border-line]:!border-paper/20">
+            {exclusives.map((p) => (
+              <PropertyCard key={p.id} p={p} />
+            ))}
+          </div>
+        </Section>
+      )}
+
       <Section>
         <div className="grid gap-9 md:grid-cols-2 lg:grid-cols-3">
-          {properties.map((p) => (
+          {featured.map((p) => (
             <PropertyCard key={p.id} p={p} />
           ))}
         </div>
