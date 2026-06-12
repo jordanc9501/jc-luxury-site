@@ -143,6 +143,30 @@ export default async function PropertyPage({
         </div>
       </Section>
 
+      {p.gallery.length > 0 && (
+        <Section className="!pt-0">
+          <h2 className="mb-8 text-3xl md:text-4xl">Photo Gallery</h2>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+            {p.gallery.map((src, i) => (
+              <div
+                key={src}
+                className={`group overflow-hidden bg-stone ${
+                  i % 8 === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={`${p.address}, ${p.city} — photo ${i + 2}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
       <Section className="bg-stone">
         <h2 className="mb-10 text-3xl md:text-4xl">Similar Listings</h2>
         <div className="grid gap-9 md:grid-cols-3">
