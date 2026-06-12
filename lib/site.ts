@@ -34,8 +34,7 @@ export const site = {
     'https://cdn.sanity.io/images/nfo48qlc/production/02cf2008bdd695e69286cce78db53ca67f1a52fc-640x154.png',
   logoDark:
     'https://cdn.sanity.io/images/nfo48qlc/production/7af534d0fcd6b3701711ee2eb8b76805759b39bb-640x154.png',
-  compassLogo:
-    'https://cdn.sanity.io/images/nfo48qlc/production/70e1c0949551f7a52b0c5ebc7868764f46771265-390x140.png',
+  compassLogo: '/compass-logo.svg', // official Compass wordmark, self-hosted
   social: {
     instagram: 'https://www.instagram.com/jcluxuryresidential',
     facebook: 'https://www.facebook.com/JordanAnthonyCohen',
