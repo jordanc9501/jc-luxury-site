@@ -29,13 +29,13 @@ export function Header({ solid = false }: { solid?: boolean }) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 px-[6vw] transition-all duration-300 ${
         solid || scrolled || open
           ? 'bg-paper/90 backdrop-blur border-b border-line py-3'
           : 'py-6'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-12 px-[6vw]">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-12">
         <Link href="/" onClick={() => setOpen(false)} className="block shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
