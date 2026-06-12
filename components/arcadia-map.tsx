@@ -6,15 +6,8 @@
 
 import { useEffect, useRef } from 'react';
 
-// Arterial coordinates (approx.)
-const CAMELBACK = 33.5093;
-const INDIAN_SCHOOL = 33.4949;
-const THOMAS = 33.4805;
-const ST_32 = -112.007;
-const ST_40 = -111.9897;
-const ST_44 = -111.981;
-const ST_56 = -111.9554;
-const ST_68 = -111.9295;
+// All three boundaries are the exact polygons from Jordan's
+// Google My Maps export (KML) — do not hand-adjust.
 const AREAS: { name: string; sub: string; color: string; bounds: [number, number][][]; strong?: boolean }[] = [
   {
     // The lens between Camelback Rd (which bends along the mountain base)
@@ -50,26 +43,38 @@ const AREAS: { name: string; sub: string; color: string; bounds: [number, number
     strong: true,
   },
   {
-    // 32nd to 44th, Camelback to Indian School
+    // Exact boundary exported from Jordan's Google My Maps drawing (KML)
     name: 'Arcadia Lite',
     sub: 'friendlier entry points',
     color: '#6fa8dc',
-    bounds: [[[INDIAN_SCHOOL, ST_32], [CAMELBACK, ST_32], [CAMELBACK, ST_44], [INDIAN_SCHOOL, ST_44]]],
+    bounds: [[
+      [33.5025759, -112.0129967],
+      [33.495168, -112.0131254],
+      [33.4948816, -111.9869471],
+      [33.5043293, -111.9869042],
+      [33.5069416, -111.9911099],
+      [33.5096969, -111.9943285],
+      [33.5099473, -112.0130396],
+    ]],
   },
   {
-    // 40th to 56th, Indian School to Thomas; NE corner clipped by the
-    // canal's diagonal down to 56th St south of Arizona Falls.
-    // Traced from Jordan's drawn boundary.
+    // Exact boundary exported from Jordan's Google My Maps drawing (KML)
     name: 'Arcadia Osborn',
     sub: 'renovation hotspot',
     color: '#93c47d',
     bounds: [[
-      [INDIAN_SCHOOL, ST_40],   // NW — Indian School & 40th
-      [INDIAN_SCHOOL, -111.964], // Indian School at ~52nd
-      [33.4925, -111.959],       // canal diagonal
-      [33.4892, ST_56],          // canal reaches 56th, south of the Falls
-      [THOMAS, ST_56],           // SE — Thomas & 56th
-      [THOMAS, ST_40],           // SW — Thomas & 40th
+      [33.4947385, -111.9955655],
+      [33.4803145, -111.9954796],
+      [33.4799923, -111.9607611],
+      [33.4891115, -111.9605506],
+      [33.4889723, -111.9622008],
+      [33.4893342, -111.9637652],
+      [33.4902568, -111.9657433],
+      [33.4912669, -111.967928],
+      [33.4928417, -111.9712325],
+      [33.4940227, -111.9738503],
+      [33.4946311, -111.9747515],
+      [33.4950248, -111.9955655],
     ]],
   },
 ];
@@ -144,9 +149,8 @@ export function ArcadiaMap() {
         aria-label="Map of Arcadia Proper, Arcadia Lite, and Arcadia Osborn in Phoenix, Arizona"
       />
       <figcaption className="mt-3 text-xs text-mist">
-        Arcadia Proper: 44th–68th St, Camelback Rd to the Arizona Canal ·
-        Arcadia Lite: 32nd–44th St, Camelback to Indian School · Arcadia
-        Osborn: 40th–56th St, Indian School to Thomas. Boundaries informal.
+        Boundaries as drawn by Jordan Cohen. Micro-area definitions are
+        informal and used locally by residents and agents.
       </figcaption>
     </figure>
   );
