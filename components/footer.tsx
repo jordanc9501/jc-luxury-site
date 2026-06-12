@@ -97,7 +97,7 @@ export function Footer() {
           </p>
           <div className="mt-5 flex items-center gap-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={site.compassLogo} alt="Compass" className="h-11 w-auto" />
+            <img src={site.compassLogo} alt="Compass" className="h-5 w-auto" />
             <p>
               © {new Date().getFullYear()} {site.brand}. All rights reserved.
             </p>
