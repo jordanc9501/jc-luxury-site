@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
+import { ArcadiaMap } from '@/components/arcadia-map';
 import { CTASection, FaqList, PropertyCard, Section } from '@/components/ui';
 import { getNeighborhood, getNeighborhoods, getProperties } from '@/lib/cms';
 import { breadcrumbSchema, faqSchema, neighborhoodSchema } from '@/lib/schema';
@@ -81,6 +82,7 @@ export default async function NeighborhoodPage({
           <div>
             <h2 className="text-3xl md:text-4xl">Overview</h2>
             <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.overview}</p>
+            {n.slug === 'arcadia' && <ArcadiaMap />}
             <h2 className="mt-12 text-3xl md:text-4xl">The Lifestyle</h2>
             <p className="mt-5 whitespace-pre-line leading-relaxed text-mist">{n.lifestyle}</p>
 
