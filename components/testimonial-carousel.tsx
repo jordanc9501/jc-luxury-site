@@ -37,7 +37,15 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
               i === active ? 'opacity-100' : 'pointer-events-none opacity-0'
             }`}
           >
-            <blockquote className="font-serif text-3xl italic leading-snug md:text-4xl">
+            <blockquote
+              className={`font-serif italic ${
+                t.quote.length > 420
+                  ? 'text-lg leading-relaxed md:text-xl'
+                  : t.quote.length > 220
+                    ? 'text-xl leading-relaxed md:text-2xl'
+                    : 'text-3xl leading-snug md:text-4xl'
+              }`}
+            >
               “{t.quote}”
             </blockquote>
             <p className="mt-7 text-[11px] tracking-[0.28em] uppercase text-mist">
