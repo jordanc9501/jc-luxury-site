@@ -45,12 +45,12 @@ export function Header({ solid = false }: { solid?: boolean }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 xl:flex">
+        <nav className="hidden items-center gap-7 xl:flex">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`whitespace-nowrap text-[11px] tracking-[0.18em] uppercase transition-opacity hover:opacity-50 ${
+              className={`whitespace-nowrap text-[12px] font-medium tracking-[0.18em] uppercase transition-opacity hover:opacity-50 ${
                 dark ? 'text-coal' : 'text-paper'
               }`}
             >
@@ -59,7 +59,7 @@ export function Header({ solid = false }: { solid?: boolean }) {
           ))}
           <Link
             href="/contact"
-            className={`whitespace-nowrap border px-4 py-2.5 text-[11px] tracking-[0.18em] uppercase transition-colors ${
+            className={`whitespace-nowrap border px-5 py-3 text-[12px] font-medium tracking-[0.18em] uppercase transition-colors ${
               dark
                 ? 'border-coal text-coal hover:bg-coal hover:text-paper'
                 : 'border-paper text-paper hover:bg-paper hover:text-coal'
@@ -73,7 +73,7 @@ export function Header({ solid = false }: { solid?: boolean }) {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className={`xl:hidden text-[11px] tracking-[0.3em] uppercase ${dark ? 'text-coal' : 'text-paper'}`}
+          className={`xl:hidden text-[12px] font-medium tracking-[0.3em] uppercase ${dark ? 'text-coal' : 'text-paper'}`}
         >
           {open ? 'Close' : 'Menu'}
         </button>
