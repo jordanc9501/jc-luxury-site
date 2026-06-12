@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Header } from '@/components/header';
 import { ContactForm } from '@/components/contact-form';
 import { CTASection, PropertyCard, Section } from '@/components/ui';
+import { GalleryGrid, PropertyHero } from '@/components/property-gallery';
 import { formatPrice, statusLabel } from '@/lib/data';
 import { getProperties, getProperty } from '@/lib/cms';
 import { breadcrumbSchema, propertySchema } from '@/lib/schema';
@@ -77,17 +78,11 @@ export default async function PropertyPage({
             {' / '}
             <span className="text-coal">{p.address}</span>
           </nav>
-          <div className="relative aspect-[16/9] overflow-hidden bg-stone">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={p.mainImage}
-              alt={`${p.address}, ${p.city}, ${p.state}`}
-              className="h-full w-full object-cover"
-            />
-            <span className="absolute left-5 top-5 bg-coal/85 px-4 py-2 text-[10px] tracking-[0.24em] uppercase text-paper">
-              {statusLabel[p.status]}
-            </span>
-          </div>
+          <PropertyHero
+            images={[p.mainImage, ...p.gallery]}
+            alt={`${p.address}, ${p.city}, ${p.state}`}
+            badge={statusLabel[p.status]}
+          />
         </div>
       </div>
 
@@ -146,24 +141,7 @@ export default async function PropertyPage({
       {p.gallery.length > 0 && (
         <Section className="!pt-0">
           <h2 className="mb-8 text-3xl md:text-4xl">Photo Gallery</h2>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-            {p.gallery.map((src, i) => (
-              <div
-                key={src}
-                className={`group overflow-hidden bg-stone ${
-                  i % 8 === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
-                }`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={src}
-                  alt={`${p.address}, ${p.city} — photo ${i + 2}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
+          <GalleryGrid gallery={p.gallery} alt={`${p.address}, ${p.city}`} />
         </Section>
       )}
 
