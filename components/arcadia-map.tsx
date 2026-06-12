@@ -48,10 +48,19 @@ const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?:
     bounds: [[[INDIAN_SCHOOL, ST_32], [CAMELBACK, ST_32], [CAMELBACK, ST_44], [INDIAN_SCHOOL, ST_44]]],
   },
   {
-    // 40th to 56th, Indian School to Thomas
+    // 40th to 56th, Indian School to Thomas; NE corner clipped by the
+    // canal's diagonal down to 56th St south of Arizona Falls.
+    // Traced from Jordan's drawn boundary.
     name: 'Arcadia Osborn',
     sub: 'renovation hotspot',
-    bounds: [[[THOMAS, ST_40], [INDIAN_SCHOOL, ST_40], [INDIAN_SCHOOL, ST_56], [THOMAS, ST_56]]],
+    bounds: [[
+      [INDIAN_SCHOOL, ST_40],   // NW — Indian School & 40th
+      [INDIAN_SCHOOL, -111.964], // Indian School at ~52nd
+      [33.4925, -111.959],       // canal diagonal
+      [33.4892, ST_56],          // canal reaches 56th, south of the Falls
+      [THOMAS, ST_56],           // SE — Thomas & 56th
+      [THOMAS, ST_40],           // SW — Thomas & 40th
+    ]],
   },
 ];
 
