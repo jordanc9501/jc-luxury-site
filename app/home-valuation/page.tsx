@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/header';
 import { ContactForm } from '@/components/contact-form';
+import { AvmWidget } from '@/components/avm-widget';
 import { FaqList, PageHero, Section } from '@/components/ui';
 import { sellerFaqs } from '@/lib/data';
 import { breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/json-ld';
 
 export const metadata: Metadata = {
-  title: 'What Is My Home Worth? | Free Luxury Home Valuation',
+  title: 'What Is My Home Worth? | Instant & Expert Home Valuation',
   description:
-    'Request a precise, data-driven valuation of your Scottsdale, Paradise Valley, or Phoenix home from Jordan Cohen — not an automated estimate.',
+    'Get an instant estimate of your Scottsdale, Paradise Valley, or Phoenix home’s value — then request a precise, human valuation from Jordan Cohen.',
   alternates: { canonical: '/home-valuation' },
 };
 
@@ -29,7 +30,7 @@ export default function HomeValuationPage() {
       <PageHero
         eyebrow="For Homeowners"
         title="What Is Your Home Actually Worth?"
-        sub="Automated estimates miss what makes a luxury home valuable — architecture, lot, views, condition, and timing. Receive a precise, human analysis instead."
+        sub="Start with an instant, data-driven estimate — then go deeper with a precise, human analysis of architecture, lot, views, condition, and timing."
       />
 
       <Section>
@@ -56,11 +57,22 @@ export default function HomeValuationPage() {
             </div>
           </div>
           <div className="h-fit border border-line bg-stone p-8 md:p-10 lg:sticky lg:top-28">
-            <h2 className="text-3xl">Request Your Valuation</h2>
-            <p className="mb-8 mt-2 text-sm text-mist">
-              Free, confidential, and tailored to your property. Include the
-              address in your message.
-            </p>
+            <p className="eyebrow">Instant Estimate</p>
+            <h2 className="mt-2 text-3xl">What’s My Home Worth?</h2>
+            <AvmWidget />
+          </div>
+        </div>
+      </Section>
+
+      <Section className="bg-stone">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">Prefer a Human Analysis?</p>
+          <h2 className="mt-3 text-3xl md:text-4xl">Request a Private, Detailed Valuation</h2>
+          <p className="mx-auto mt-4 mb-10 max-w-xl text-sm leading-relaxed text-mist">
+            Free, confidential, and tailored to your property. Include the
+            address in your message.
+          </p>
+          <div className="text-left">
             <ContactForm subject="Home Valuation Request" />
           </div>
         </div>
