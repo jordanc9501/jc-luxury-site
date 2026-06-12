@@ -15,13 +15,14 @@ const ST_40 = -111.9897;
 const ST_44 = -111.981;
 const ST_56 = -111.9554;
 const ST_68 = -111.9295;
-const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?: boolean }[] = [
+const AREAS: { name: string; sub: string; color: string; bounds: [number, number][][]; strong?: boolean }[] = [
   {
     // The lens between Camelback Rd (which bends along the mountain base)
     // and the Arizona Canal's arc, 44th St to the canal mouth near
     // Fashion Square. Traced from Jordan's drawn boundary.
     name: 'Arcadia Proper',
     sub: 'largest irrigated lots · strongest values',
+    color: '#d4af5f',
     bounds: [[
       [33.5093, -111.981],   // 44th & Camelback
       [33.5085, -111.9745],  // Camelback bending SE along the mountain
@@ -45,6 +46,7 @@ const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?:
     // 32nd to 44th, Camelback to Indian School
     name: 'Arcadia Lite',
     sub: 'friendlier entry points',
+    color: '#6fa8dc',
     bounds: [[[INDIAN_SCHOOL, ST_32], [CAMELBACK, ST_32], [CAMELBACK, ST_44], [INDIAN_SCHOOL, ST_44]]],
   },
   {
@@ -53,6 +55,7 @@ const AREAS: { name: string; sub: string; bounds: [number, number][][]; strong?:
     // Traced from Jordan's drawn boundary.
     name: 'Arcadia Osborn',
     sub: 'renovation hotspot',
+    color: '#93c47d',
     bounds: [[
       [INDIAN_SCHOOL, ST_40],   // NW — Indian School & 40th
       [INDIAN_SCHOOL, -111.964], // Indian School at ~52nd
@@ -94,25 +97,29 @@ export function ArcadiaMap() {
         scrollWheelZoom: false,
         attributionControl: true,
       });
+      // Satellite imagery + street/place labels
       L.tileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-        { attribution: 'Esri, HERE, Garmin, OpenStreetMap contributors', maxZoom: 16 },
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        { attribution: 'Esri, Maxar, Earthstar Geographics', maxZoom: 18 },
       ).addTo(map);
       L.tileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
-        { maxZoom: 16 },
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 18 },
+      ).addTo(map);
+      L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 18 },
       ).addTo(map);
 
       for (const a of AREAS) {
         const poly = L.polygon(a.bounds, {
-          color: '#1c1c1b',
-          weight: a.strong ? 2 : 1.25,
-          dashArray: a.strong ? undefined : '6 5',
-          fillColor: '#1c1c1b',
-          fillOpacity: a.strong ? 0.14 : 0.06,
+          color: a.color,
+          weight: 2.5,
+          fillColor: a.color,
+          fillOpacity: 0.3,
         }).addTo(map);
         poly.bindTooltip(
-          `<div style="text-align:center;font-family:Georgia,serif;font-size:14px;color:#1c1c1b">${a.name}<br/><span style="font-family:Inter,Helvetica,sans-serif;font-size:10px;color:#6b6b68">${a.sub}</span></div>`,
+          `<div style="text-align:center;font-family:Georgia,serif;font-size:14px;color:#fff">${a.name}<br/><span style="font-family:Inter,Helvetica,sans-serif;font-size:10px;color:rgba(255,255,255,.8)">${a.sub}</span></div>`,
           { permanent: true, direction: 'center', className: 'arcadia-label' },
         );
       }
@@ -123,7 +130,7 @@ export function ArcadiaMap() {
   return (
     <figure className="mt-12">
       <p className="eyebrow mb-4">The Micro-Areas, Mapped</p>
-      <style>{`.arcadia-label{background:rgba(252,252,250,.85);border:1px solid #e3e3df;box-shadow:none;padding:6px 10px}.arcadia-label::before{display:none}`}</style>
+      <style>{`.arcadia-label{background:rgba(17,17,16,.72);border:none;box-shadow:0 1px 6px rgba(0,0,0,.4);border-radius:2px;padding:6px 12px}.arcadia-label::before{display:none}`}</style>
       <div
         ref={ref}
         className="h-[440px] w-full border border-line bg-stone"
